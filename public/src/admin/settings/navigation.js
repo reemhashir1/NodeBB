@@ -14,7 +14,6 @@ define('admin/settings/navigation', [
 
 	navigation.init = function () {
 		available = ajaxify.data.available;
-
 		$('#available').find('li .drag-item').draggable({
 			connectToSortable: '#active-navigation',
 			helper: 'clone',
@@ -35,13 +34,16 @@ define('admin/settings/navigation', [
 	};
 
 	function onIconPickerClick() {
+        console.log('Reem Hashir');
 		const iconEl = $(this).find('i');
 		iconSelect.init(iconEl, onIconSelect);
 	}
 
 	function onIconSelect(el) {
 		const newIconClass = el.attr('value');
+        console.log('Reem Hashir');
 		const index = el.parents('[data-index]').attr('data-index');
+        console.log('Reem Hashir');
 		$('#active-navigation [data-index="' + index + '"] i.nav-icon').attr('class', 'fa fa-fw ' + newIconClass);
 		el.siblings('[name="iconClass"]').val(newIconClass);
 		el.siblings('.change-icon-link').toggleClass('hidden', !!newIconClass);
@@ -49,18 +51,22 @@ define('admin/settings/navigation', [
 
 	function onDropdownClick() {
 		const el = $(this);
+        console.log('Reem Hashir');
 		const index = el.parents('[data-index]').attr('data-index');
 		$('#active-navigation [data-index="' + index + '"] i.dropdown-icon').toggleClass('hidden', !el.is(':checked'));
 	}
 
 	function onSelect() {
 		const clickedIndex = $(this).attr('data-index');
+        console.log('Reem Hashir');
 		selectIndex(clickedIndex);
+        console.log('Reem Hashir');
 		return false;
 	}
 
 	function selectIndex(index) {
 		$('#active-navigation li').removeClass('active');
+        console.log('Reem Hashir');
 		$('#active-navigation [data-index="' + index + '"]').addClass('active');
 
 		const detailsForm = $('#enabled').children('[data-index="' + index + '"]');
@@ -73,6 +79,7 @@ define('admin/settings/navigation', [
 
 	function drop(ev, ui) {
 		const id = ui.helper.attr('data-id');
+        console.log('Reem Hashir');
 		const el = $('#active-navigation [data-id="' + id + '"]');
 		const data = getData(id);
 
