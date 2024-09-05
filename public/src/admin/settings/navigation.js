@@ -124,9 +124,7 @@ function save() {
         form.forEach(function (input) {
             if (data[input.name]) {
                 if (!Array.isArray(data[input.name])) {
-                    data[input.name] = [
-                        data[input.name],
-                    ];
+                    data[input.name] = [data[input.name]];
                 }
                 data[input.name].push(input.value);
             } else {
