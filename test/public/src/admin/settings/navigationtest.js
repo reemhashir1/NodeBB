@@ -4,12 +4,15 @@ const assert = require('assert');
 const sinon = require('sinon');
 const $ = require('jquery');
 const { JSDOM } = require('jsdom');
+
+// Import modules using correct paths
+const navigation = require('../../../public/src/admin/settings/navigation');
 const iconSelect = require('iconSelect');
 const Benchpress = require('benchpress');
 const alerts = require('alerts');
 const translator = require('translator');
 const ajaxify = require('ajaxify');
-const navigation = require('../public/src/admin/settings/navigation');
+const socket = require('socket.io-client'); // Ensure socket is mocked properly
 
 // Set up a DOM environment for testing
 const { window } = new JSDOM('<!doctype html><html><body><div id="available"><ul></ul></div><div id="active-navigation"><ul></ul></div><div id="enabled"><ul></ul></div><button id="save"></button></body></html>');
@@ -17,18 +20,14 @@ global.window = window;
 global.document = window.document;
 global.$ = $;
 
-// Mock external dependencies
+// Stub methods
 sinon.stub(iconSelect, 'init').callsFake((iconEl, callback) => callback({ attr: () => 'new-icon-class' }));
 sinon.stub(Benchpress, 'parse').callsFake((view, template, data, callback) => callback('<li>Mocked Item</li>'));
 sinon.stub(translator, 'escape').callsFake(str => str);
 sinon.stub(translator, 'translate').callsFake((li, callback) => callback(li));
 sinon.stub(alerts, 'error');
 sinon.stub(ajaxify, 'data').value({ available: [{ groups: [] }] });
-
-// Mock the socket object
-const socket = {
-    emit: sinon.stub().callsFake((event, data, callback) => callback(null))
-};
+sinon.stub(socket, 'emit').callsFake((event, data, callback) => callback(null));
 
 describe('Navigation Module', function() {
     beforeEach(function() {
