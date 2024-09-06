@@ -11,7 +11,7 @@ define('admin/settings/navigation', [
 ], function (translator, iconSelect, Benchpress, alerts) {
 	const navigation = {};
 	let available;
-
+    console.log('REEM HASHIR');
 	navigation.init = function () {
 		available = ajaxify.data.available;
 		$('#available').find('li .drag-item').draggable({
@@ -35,13 +35,13 @@ define('admin/settings/navigation', [
 
 	function onIconPickerClick() {
 		const iconEl = $(this).find('i');
-        console.log("Icon element selected:", iconEl);
+        console.log('Reem Hashir', iconEl);
 		iconSelect.init(iconEl, onIconSelect);
 	}
 
 	function onIconSelect(el) {
 		const newIconClass = el.attr('value');
-        console.log("New icon class selected:", newIconClass);
+        console.log('Reem Hashir', newIconClass);
 		const index = el.parents('[data-index]').attr('data-index');
 		$('#active-navigation [data-index="' + index + '"] i.nav-icon').attr('class', 'fa fa-fw ' + newIconClass);
 		el.siblings('[name="iconClass"]').val(newIconClass);
@@ -56,6 +56,7 @@ define('admin/settings/navigation', [
 		$('#active-navigation [data-index="' + index + '"] i.dropdown-icon').toggleClass('hidden', !el.is(':checked'));
 	}
 
+    console.log('Reem Hashir');
 	function onSelect() {
 		const clickedIndex = $(this).attr('data-index');
 		selectIndex(clickedIndex);
@@ -73,7 +74,7 @@ define('admin/settings/navigation', [
 			detailsForm.removeClass('hidden');
 		}
 	}
-
+//used ChatGPT to generate the helper functions
 	function drop(ev, ui) {
 		const id = ui.helper.attr('data-id');
 		const el = $('#active-navigation [data-id="' + id + '"]');
